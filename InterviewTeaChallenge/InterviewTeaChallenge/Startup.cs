@@ -32,8 +32,6 @@ namespace InterviewTeaChallenge
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-                var xmlPath = $"{AppDomain.CurrentDomain.BaseDirectory}CorewithSwagger.xml";
-                c.IncludeXmlComments(xmlPath);
             });
         }
 
