@@ -10,7 +10,7 @@ namespace JO.InterviewTeaChallenge.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: "Tea In Memory Database");
+            optionsBuilder.UseSqlite("DataSource=:memory:");
         }
 
         public DbSet<Tea> Tea { get; set; }
