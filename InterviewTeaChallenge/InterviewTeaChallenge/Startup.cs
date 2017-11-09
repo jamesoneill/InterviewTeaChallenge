@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using JO.InterviewTeaChallenge.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace InterviewTeaChallenge
 {
