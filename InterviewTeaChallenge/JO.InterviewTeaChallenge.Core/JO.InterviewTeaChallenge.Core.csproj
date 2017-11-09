@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JO.InterviewTeaChallenge.Data\JO.InterviewTeaChallenge.Data.csproj" />
+  </ItemGroup>
+
 </Project>
