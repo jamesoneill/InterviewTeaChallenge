@@ -14,6 +14,8 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using JO.InterviewTeaChallenge.Data;
 using Microsoft.EntityFrameworkCore;
 using JO.InterviewTeaChallenge.Data.Models;
+using JO.InterviewTeaChallenge.Core.Services;
+using JO.InterviewTeaChallenge.Core.Services.Interfaces;
 
 namespace InterviewTeaChallenge
 {
@@ -29,12 +31,12 @@ namespace InterviewTeaChallenge
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TeaContext>();
             services.AddMvc();
-            services.AddTransient<IRepository<Tea>, EfRepository<Tea>>();
+            services.AddSingleton<IRepository<Tea>, InMemoryRepository<Tea>>();
+            services.AddTransient<ITeaService, TeaService>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Tea API", Version = "v1" });
             });
         }
 

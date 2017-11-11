@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JO.InterviewTeaChallenge.Core\JO.InterviewTeaChallenge.Core.csproj" />
     <ProjectReference Include="..\JO.InterviewTeaChallenge.Data\JO.InterviewTeaChallenge.Data.csproj" />
   </ItemGroup>
 

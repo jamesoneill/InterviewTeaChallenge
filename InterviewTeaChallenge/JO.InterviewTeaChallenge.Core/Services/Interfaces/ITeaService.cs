@@ -12,6 +12,6 @@ namespace JO.InterviewTeaChallenge.Core.Services.Interfaces
         Task DeleteTeaAsync(Guid id);
         Task<Tea> GetTeaAsync(Guid id);
         Task<IReadOnlyCollection<Tea>> GetTeasAsync();
-        Task UpdateTeaAsync(Guid id, string name, bool requiresMilk)
+        Task UpdateTeaAsync(Guid id, string name, bool requiresMilk);
     }
 }

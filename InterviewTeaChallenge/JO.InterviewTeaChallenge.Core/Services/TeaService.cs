@@ -6,6 +6,7 @@ using JO.InterviewTeaChallenge.Data.Models;
 using JO.InterviewTeaChallenge.Data;
 using System.Threading.Tasks;
 using System.Linq;
+using JO.InterviewTeaChallenge.Core.SafeExceptions;
 
 namespace JO.InterviewTeaChallenge.Core.Services
 {
@@ -32,16 +33,12 @@ namespace JO.InterviewTeaChallenge.Core.Services
         {
             var tea = await _teaRepository.GetById(id);
 
-            if (tea == null) throw new Exception("Tea not found to delete.");
-
             await _teaRepository.Delete(tea);
         }
 
         public async Task<Tea> GetTeaAsync(Guid id)
         {
             var tea =  await _teaRepository.GetById(id);
-
-            if (tea == null) throw new Exception("Tea not found to get.");
 
             return tea;
         }
@@ -57,7 +54,7 @@ namespace JO.InterviewTeaChallenge.Core.Services
         {
             var tea = await _teaRepository.GetById(id);
 
-            if (tea == null) throw new Exception("Tea not found to update.");
+            if (tea == null) throw new NotFoundException();
 
             tea.Name = name;
             tea.RequiresMilk = requiresMilk;
