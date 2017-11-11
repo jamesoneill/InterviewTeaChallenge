@@ -3,34 +3,66 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using JO.InterviewTeaChallenge.Data.Models;
+using JO.InterviewTeaChallenge.Data;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace JO.InterviewTeaChallenge.Core.Services
 {
     public class TeaService : ITeaService
     {
-        public int CreateTea(Tea tea)
+        private readonly IRepository<Tea> _teaRepository;
+        public TeaService(IRepository<Tea> teaRepository)
         {
-            throw new NotImplementedException();
+            _teaRepository = teaRepository;
+        }
+        public async Task<Guid> CreateTeaAsync(string name, bool requiresMilk)
+        {
+            var tea = new Tea()
+            {
+                Id = Guid.NewGuid(),
+                Name = name,
+                RequiresMilk = requiresMilk,
+            };
+
+            return await _teaRepository.Insert(tea);
         }
 
-        public void DeleteTea(int id)
+        public async Task DeleteTeaAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var tea = await _teaRepository.GetById(id);
+
+            if (tea == null) throw new Exception("Tea not found to delete.");
+
+            await _teaRepository.Delete(tea);
         }
 
-        public Tea GetTea(int id)
+        public async Task<Tea> GetTeaAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var tea =  await _teaRepository.GetById(id);
+
+            if (tea == null) throw new Exception("Tea not found to get.");
+
+            return tea;
         }
 
-        public IReadOnlyCollection<Tea> GetTeas()
+        public async Task<IReadOnlyCollection<Tea>> GetTeasAsync()
         {
-            throw new NotImplementedException();
+            var teas = await _teaRepository.Table;
+
+            return teas.ToList();
         }
 
-        public void UpdateTea(int id, Tea tea)
+        public async Task UpdateTeaAsync(Guid id, string name, bool requiresMilk)
         {
-            throw new NotImplementedException();
+            var tea = await _teaRepository.GetById(id);
+
+            if (tea == null) throw new Exception("Tea not found to update.");
+
+            tea.Name = name;
+            tea.RequiresMilk = requiresMilk;
+
+            await _teaRepository.Update(tea);
         }
     }
 }

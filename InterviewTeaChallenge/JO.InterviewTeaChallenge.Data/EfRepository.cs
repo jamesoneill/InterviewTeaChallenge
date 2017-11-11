@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace JO.InterviewTeaChallenge.Data
 {
@@ -17,33 +18,35 @@ namespace JO.InterviewTeaChallenge.Data
             _context = context;
         }
 
-        public virtual T GetById(Guid id)
+        public virtual async Task<T> GetById(Guid id)
         {
-            return Entities.Find(id);
+            return await Entities.FindAsync(id);
         }
 
-        public virtual void Insert(T entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-
-            Entities.Add(entity);
-            _context.SaveChanges();
-        }
-
-        public virtual void Update(T entity)
+        public virtual async Task<Guid> Insert(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            _context.SaveChanges();
+            await Entities.AddAsync(entity);
+            await _context.SaveChangesAsync();
+
+            return entity.Id;
         }
 
-        public virtual void Delete(T entity)
+        public virtual async Task Update(T entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public virtual async Task Delete(T entity)
         {
             if (entity == null)
             {
@@ -51,22 +54,22 @@ namespace JO.InterviewTeaChallenge.Data
             }
 
             Entities.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public virtual IQueryable<T> Table
+        public virtual Task<IQueryable<T>> Table
         {
             get
             {
-                return Entities;
+                return Task.FromResult<IQueryable<T>>(Entities);
             }
         }
 
-        public virtual IQueryable<T> TableNoTracking
+        public virtual Task<IQueryable<T>> TableNoTracking
         {
             get
             {
-                return Entities.AsNoTracking<T>();
+                return Task.FromResult<IQueryable<T>>(Entities.AsNoTracking<T>());
             }
         }
 
