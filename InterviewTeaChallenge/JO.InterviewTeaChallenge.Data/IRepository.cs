@@ -13,6 +13,6 @@ namespace JO.InterviewTeaChallenge.Data
         Task<Guid> Insert(T entity);
         Task Update(T entity);
         Task Delete(T entity);
-        Task<IList<T>> Table { get; }
+        Task<IQueryable<T>> Table { get; }
     }
 }

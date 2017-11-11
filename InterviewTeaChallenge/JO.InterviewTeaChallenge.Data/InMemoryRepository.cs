@@ -47,11 +47,11 @@ namespace JO.InterviewTeaChallenge.Data
             await Task.FromResult(Entities.Remove(entity));
         }
 
-        public Task<IList<T>> Table
+        public Task<IQueryable<T>> Table
         {
             get
             {
-                return Task.FromResult<IList<T>>(Entities);
+                return Task.FromResult<IQueryable<T>>(Entities.AsQueryable());
             }
         }
 
