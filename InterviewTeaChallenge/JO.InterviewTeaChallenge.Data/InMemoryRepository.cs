@@ -1,5 +1,4 @@
 ﻿using JO.InterviewTeaChallenge.Data.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

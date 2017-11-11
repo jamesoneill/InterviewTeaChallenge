@@ -158,6 +158,14 @@ namespace InterviewTeaChallenge.Controllers
                     Tea = null,
                 });
             }
+            catch (NotFoundException ex)
+            {
+                var tea = new TeaResponse();
+
+                tea.IsSuccess = false;
+                tea.Errors = GetErrors(ex, tea.Errors);
+                return NotFound(tea);
+            }
             catch (Exception ex)
             {
                 var tea = new TeaResponse();

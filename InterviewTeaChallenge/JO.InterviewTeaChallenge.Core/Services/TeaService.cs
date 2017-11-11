@@ -33,6 +33,8 @@ namespace JO.InterviewTeaChallenge.Core.Services
         {
             var tea = await _teaRepository.GetById(id);
 
+            if (tea == null) throw new NotFoundException();
+
             await _teaRepository.Delete(tea);
         }
 
